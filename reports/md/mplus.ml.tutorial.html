@@ -215,12 +215,12 @@ str(pop2, give.attr = FALSE)
 </code></pre>
 
 <pre><code class="r">
-print(xtable(describe(pop2, interp = F, skew = F)), type = &quot;html&quot;)
+print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = &quot;html&quot;)
 </code></pre>
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
 
-<!-- Sat Mar 16 16:45:48 2013 -->
+<!-- Sat Mar 16 17:10:31 2013 -->
 
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
@@ -230,15 +230,6 @@ print(xtable(describe(pop2, interp = F, skew = F)), type = &quot;html&quot;)
   <TR> <TD align="right"> sex </TD> <TD align="right">   4 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.51 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.51 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.01 </TD> </TR>
   <TR> <TD align="right"> texp </TD> <TD align="right">   5 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 14.26 </TD> <TD align="right"> 6.55 </TD> <TD align="right"> 15.00 </TD> <TD align="right"> 14.40 </TD> <TD align="right"> 8.15 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 23.00 </TD> <TD align="right"> 0.15 </TD> </TR>
   <TR> <TD align="right"> popular </TD> <TD align="right">   6 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 5.08 </TD> <TD align="right"> 1.38 </TD> <TD align="right"> 5.10 </TD> <TD align="right"> 5.08 </TD> <TD align="right"> 1.33 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 9.50 </TD> <TD align="right"> 9.50 </TD> <TD align="right"> 0.03 </TD> </TR>
-  <TR> <TD align="right"> popteach </TD> <TD align="right">   7 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 5.06 </TD> <TD align="right"> 1.40 </TD> <TD align="right"> 5.00 </TD> <TD align="right"> 5.08 </TD> <TD align="right"> 1.48 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 10.00 </TD> <TD align="right"> 9.00 </TD> <TD align="right"> 0.03 </TD> </TR>
-  <TR> <TD align="right"> Zextrav </TD> <TD align="right">   8 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> -0.17 </TD> <TD align="right"> -0.04 </TD> <TD align="right"> 1.17 </TD> <TD align="right"> -3.34 </TD> <TD align="right"> 3.79 </TD> <TD align="right"> 7.13 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Zsex </TD> <TD align="right">   9 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.99 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> -1.01 </TD> <TD align="right"> 0.99 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Ztexp </TD> <TD align="right">  10 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> -0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.11 </TD> <TD align="right"> 0.02 </TD> <TD align="right"> 1.24 </TD> <TD align="right"> -1.87 </TD> <TD align="right"> 1.64 </TD> <TD align="right"> 3.51 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Zpopular </TD> <TD align="right">  11 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> -0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.02 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 0.97 </TD> <TD align="right"> -3.67 </TD> <TD align="right"> 3.20 </TD> <TD align="right"> 6.87 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Zpopteach </TD> <TD align="right">  12 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> -0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> -0.04 </TD> <TD align="right"> 0.01 </TD> <TD align="right"> 1.06 </TD> <TD align="right"> -2.89 </TD> <TD align="right"> 3.52 </TD> <TD align="right"> 6.41 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Cextrav </TD> <TD align="right">  13 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.26 </TD> <TD align="right"> -0.21 </TD> <TD align="right"> -0.04 </TD> <TD align="right"> 1.48 </TD> <TD align="right"> -4.21 </TD> <TD align="right"> 4.79 </TD> <TD align="right"> 9.00 </TD> <TD align="right"> 0.03 </TD> </TR>
-  <TR> <TD align="right"> Ctexp </TD> <TD align="right">  14 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 6.55 </TD> <TD align="right"> 0.74 </TD> <TD align="right"> 0.14 </TD> <TD align="right"> 8.15 </TD> <TD align="right"> -12.26 </TD> <TD align="right"> 10.74 </TD> <TD align="right"> 23.00 </TD> <TD align="right"> 0.15 </TD> </TR>
-  <TR> <TD align="right"> Csex </TD> <TD align="right">  15 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.01 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 0.01 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> -0.50 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.01 </TD> </TR>
    </TABLE>
 
 <h2>Add Unique ID variable</h2>
@@ -252,12 +243,12 @@ print(paste(&quot;# unique id variables =&quot;, length(u.id)))
 </code></pre>
 
 <pre><code class="r">
-print(xtable(describe(pop2, interp = F, skew = F)), type = &quot;html&quot;)
+print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = &quot;html&quot;)
 </code></pre>
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
 
-<!-- Sat Mar 16 16:45:49 2013 -->
+<!-- Sat Mar 16 17:10:31 2013 -->
 
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
@@ -267,32 +258,23 @@ print(xtable(describe(pop2, interp = F, skew = F)), type = &quot;html&quot;)
   <TR> <TD align="right"> sex </TD> <TD align="right">   4 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.51 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.51 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.01 </TD> </TR>
   <TR> <TD align="right"> texp </TD> <TD align="right">   5 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 14.26 </TD> <TD align="right"> 6.55 </TD> <TD align="right"> 15.00 </TD> <TD align="right"> 14.40 </TD> <TD align="right"> 8.15 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 23.00 </TD> <TD align="right"> 0.15 </TD> </TR>
   <TR> <TD align="right"> popular </TD> <TD align="right">   6 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 5.08 </TD> <TD align="right"> 1.38 </TD> <TD align="right"> 5.10 </TD> <TD align="right"> 5.08 </TD> <TD align="right"> 1.33 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 9.50 </TD> <TD align="right"> 9.50 </TD> <TD align="right"> 0.03 </TD> </TR>
-  <TR> <TD align="right"> popteach </TD> <TD align="right">   7 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 5.06 </TD> <TD align="right"> 1.40 </TD> <TD align="right"> 5.00 </TD> <TD align="right"> 5.08 </TD> <TD align="right"> 1.48 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 10.00 </TD> <TD align="right"> 9.00 </TD> <TD align="right"> 0.03 </TD> </TR>
-  <TR> <TD align="right"> Zextrav </TD> <TD align="right">   8 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> -0.17 </TD> <TD align="right"> -0.04 </TD> <TD align="right"> 1.17 </TD> <TD align="right"> -3.34 </TD> <TD align="right"> 3.79 </TD> <TD align="right"> 7.13 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Zsex </TD> <TD align="right">   9 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.99 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> -1.01 </TD> <TD align="right"> 0.99 </TD> <TD align="right"> 2.00 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Ztexp </TD> <TD align="right">  10 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> -0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.11 </TD> <TD align="right"> 0.02 </TD> <TD align="right"> 1.24 </TD> <TD align="right"> -1.87 </TD> <TD align="right"> 1.64 </TD> <TD align="right"> 3.51 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Zpopular </TD> <TD align="right">  11 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> -0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.02 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 0.97 </TD> <TD align="right"> -3.67 </TD> <TD align="right"> 3.20 </TD> <TD align="right"> 6.87 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Zpopteach </TD> <TD align="right">  12 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> -0.00 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> -0.04 </TD> <TD align="right"> 0.01 </TD> <TD align="right"> 1.06 </TD> <TD align="right"> -2.89 </TD> <TD align="right"> 3.52 </TD> <TD align="right"> 6.41 </TD> <TD align="right"> 0.02 </TD> </TR>
-  <TR> <TD align="right"> Cextrav </TD> <TD align="right">  13 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 1.26 </TD> <TD align="right"> -0.21 </TD> <TD align="right"> -0.04 </TD> <TD align="right"> 1.48 </TD> <TD align="right"> -4.21 </TD> <TD align="right"> 4.79 </TD> <TD align="right"> 9.00 </TD> <TD align="right"> 0.03 </TD> </TR>
-  <TR> <TD align="right"> Ctexp </TD> <TD align="right">  14 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> 6.55 </TD> <TD align="right"> 0.74 </TD> <TD align="right"> 0.14 </TD> <TD align="right"> 8.15 </TD> <TD align="right"> -12.26 </TD> <TD align="right"> 10.74 </TD> <TD align="right"> 23.00 </TD> <TD align="right"> 0.15 </TD> </TR>
-  <TR> <TD align="right"> Csex </TD> <TD align="right">  15 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 0.01 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 0.01 </TD> <TD align="right"> 0.00 </TD> <TD align="right"> -0.50 </TD> <TD align="right"> 0.50 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 0.01 </TD> </TR>
-  <TR> <TD align="right"> id </TD> <TD align="right">  16 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 5047.60 </TD> <TD align="right"> 2907.72 </TD> <TD align="right"> 5102.50 </TD> <TD align="right"> 5043.29 </TD> <TD align="right"> 3779.15 </TD> <TD align="right"> 101.00 </TD> <TD align="right"> 10020.00 </TD> <TD align="right"> 9919.00 </TD> <TD align="right"> 65.02 </TD> </TR>
+  <TR> <TD align="right"> id </TD> <TD align="right">   7 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 5047.60 </TD> <TD align="right"> 2907.72 </TD> <TD align="right"> 5102.50 </TD> <TD align="right"> 5043.29 </TD> <TD align="right"> 3779.15 </TD> <TD align="right"> 101.00 </TD> <TD align="right"> 10020.00 </TD> <TD align="right"> 9919.00 </TD> <TD align="right"> 65.02 </TD> </TR>
    </TABLE>
 
 <pre><code class="r">some(pop2[, c(2, 1, 16)])
 </code></pre>
 
 <pre><code>     class pupil   id
-296     15    13 1513
-371     18    21 1821
-384     19    14 1914
-404     20    13 2013
-1266    64     4 6404
-1363    69     2 6902
+61       4     3  403
+63       4     5  405
+298     15    15 1515
+534     26    19 2619
+612     31     2 3102
+629     31    20 3120
+815     41    11 4111
+895     45    15 4515
+1446    73     3 7303
 1517    77     2 7702
-1550    78    16 7816
-1769    89     8 8908
-1951    98    15 9815
 </code></pre>
 
 <h2>historgrams</h2>

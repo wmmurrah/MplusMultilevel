@@ -16,7 +16,7 @@ str(pop2,give.attr=FALSE)
 
 ```{r descriptives, results='asis'}
 
-print(xtable(describe(pop2,interp=F,skew=F)),type="html")
+print(xtable(describe(pop2[,1:6],interp=F,skew=F)),type="html")
 
 ```
 
@@ -31,7 +31,7 @@ print(paste("# unique id variables =",length(u.id)))
 
 ```{r descriptives2, results='asis'}
 
-print(xtable(describe(pop2,interp=F,skew=F)),type="html")
+print(xtable(describe(pop2[,c(1:6,16)],interp=F,skew=F)),type="html")
 ```
 
 ```{r, head, comment=NA}
