@@ -1,0 +1,318 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+03/07/2013   9:31 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: pop2
+  DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+  Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
+  VARIABLE: NAMES = pupil class extrav sex texp popular poptch Zextrav Zsex Ztexp
+  Zpopular Zpoptch Cextrav Ctexp Csex;
+
+  MISSING=.;
+
+  usevariables are popular;
+
+  cluster is class;
+
+  analysis: type is twolevel;
+  !estimator= bayes;
+
+  model:
+  %within%
+  popular;
+
+  %between%
+  popular;
+
+  OUTPUT: TECH1 TECH8;
+  PLOT: TYPE = PLOT2;
+
+
+
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables: POPULAR
+*** WARNING in MODEL command
+  At least one variable is uncorrelated with all other variables in the model.
+  Check that this is what is intended.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+pop2
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        2000
+
+Number of dependent variables                                    1
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   POPULAR
+
+Variables with special functions
+
+  Cluster variable      CLASS
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicM
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        100
+
+     Average cluster size       20.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     POPULAR      0.362
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              POPULAR
+              ________
+ POPULAR        1.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        3
+
+Loglikelihood
+
+          H0 Value                       -3163.734
+          H0 Scaling Correction Factor      1.1350
+            for MLR
+          H1 Value                       -3163.734
+          H1 Scaling Correction Factor      1.1350
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    6333.468
+          Bayesian (BIC)                  6350.270
+          Sample-Size Adjusted BIC        6340.739
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.000
+          Value for Between                  0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Variances
+    POPULAR            1.222      0.047     26.199      0.000
+
+Between Level
+
+ Means
+    POPULAR            5.078      0.087     58.394      0.000
+
+ Variances
+    POPULAR            0.695      0.108      6.421      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.774E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              POPULAR
+              ________
+ 1                  0
+
+
+           THETA
+              POPULAR
+              ________
+ POPULAR            1
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              POPULAR
+              ________
+ 1                  2
+
+
+           THETA
+              POPULAR
+              ________
+ POPULAR            3
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              POPULAR
+              ________
+ 1              0.000
+
+
+           THETA
+              POPULAR
+              ________
+ POPULAR        0.956
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              POPULAR
+              ________
+ 1              5.076
+
+
+           THETA
+              POPULAR
+              ________
+ POPULAR        0.956
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.31967230D+04    0.0000000    0.0000000  EM
+              2 -0.31638500D+04   32.8729841    0.0102833  EM
+              3 -0.31637357D+04    0.1142562    0.0000361  EM
+              4 -0.31637339D+04    0.0017911    0.0000006  EM
+              5 -0.31637339D+04    0.0000434    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE H1 MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.31651447D+04    0.0000000    0.0000000  EM
+              2 -0.31637428D+04    1.4018206    0.0004429  EM
+              3 -0.31637341D+04    0.0087959    0.0000028  EM
+              4 -0.31637339D+04    0.0001691    0.0000001  EM
+              5 -0.31637339D+04    0.0000042    0.0000000  EM
+
+
+   TECHNICAL 8 OUTPUT FOR THE BASELINE MODEL
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.31637339D+04    0.0000000    0.0000000  EM
+              2 -0.31637339D+04    0.0000000    0.0000000  EM
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  No plots are available
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  09:31:16
+        Ending Time:  09:31:18
+       Elapsed Time:  00:00:02
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

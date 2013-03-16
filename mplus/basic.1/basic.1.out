@@ -1,0 +1,310 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+11/24/2012  12:02 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: pop2
+  DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+  Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
+  VARIABLE: NAMES = pupil class extrav sex texp popular poptch Zextrav Zsex Ztexp
+  Zpopular Zpoptch Cextrav Ctexp Csex;
+
+  MISSING=.;
+
+  usevariables are popular sex extrav texp;
+
+  cluster is class;
+  within is sex extrav;
+  between is texp;
+
+
+  analysis: type is twolevel random;
+
+  model:
+  %within%
+  popular on sex;
+  b_extrav | popular on extrav;
+
+  %between%
+  popular ON texp;
+  b_extrav on texp;
+
+  OUTPUT:  SAMPSTAT CINTERVAL;
+
+  Plot: type = plot1;
+
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+pop2
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        2000
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   POPULAR
+
+Observed independent variables
+   SEX         EXTRAV      TEXP
+
+Continuous latent variables
+   B_EXTRAV
+
+Variables with special functions
+
+  Cluster variable      CLASS
+
+  Within variables
+   SEX         EXTRAV
+
+  Between variables
+   TEXP
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicM
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        100
+
+     Average cluster size       20.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     POPULAR      0.313
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              POPULAR       SEX           EXTRAV        TEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ SEX            1.000         1.000
+ EXTRAV         1.000         1.000         1.000
+ TEXP           1.000         1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              POPULAR       SEX           EXTRAV        TEXP
+              ________      ________      ________      ________
+ 1              0.000         0.505         5.215         0.000
+
+
+           Covariances
+              POPULAR       SEX           EXTRAV        TEXP
+              ________      ________      ________      ________
+ POPULAR        1.378
+ SEX            0.339         0.250
+ EXTRAV         0.794         0.056         1.593
+ TEXP           0.000         0.000         0.000         0.000
+
+
+           Correlations
+              POPULAR       SEX           EXTRAV        TEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ SEX            0.578         1.000
+ EXTRAV         0.536         0.089         1.000
+ TEXP           0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              POPULAR       SEX           EXTRAV        TEXP
+              ________      ________      ________      ________
+ 1              5.078         0.000         0.000        14.300
+
+
+           Covariances
+              POPULAR       SEX           EXTRAV        TEXP
+              ________      ________      ________      ________
+ POPULAR        0.627
+ SEX            0.000         0.000
+ EXTRAV         0.000         0.000         0.000
+ TEXP           3.822         0.000         0.000        43.230
+
+
+           Correlations
+              POPULAR       SEX           EXTRAV        TEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ SEX            0.000         0.000
+ EXTRAV         0.000         0.000         0.000
+ TEXP           0.734         0.000         0.000         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -2431.148
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        8
+
+Loglikelihood
+
+          H0 Value                       -2374.730
+          H0 Scaling Correction Factor      1.1051
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    4765.459
+          Bayesian (BIC)                  4810.267
+          Sample-Size Adjusted BIC        4784.850
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ POPULAR    ON
+    SEX                1.239      0.036     34.400      0.000
+
+ Residual Variances
+    POPULAR            0.558      0.020     27.814      0.000
+
+Between Level
+
+ B_EXTRAV   ON
+    TEXP              -0.025      0.002    -10.313      0.000
+
+ POPULAR    ON
+    TEXP               0.225      0.016     14.433      0.000
+
+ Intercepts
+    POPULAR           -1.197      0.273     -4.385      0.000
+    B_EXTRAV           0.802      0.040     19.948      0.000
+
+ Residual Variances
+    POPULAR            0.280      0.066      4.228      0.000
+    B_EXTRAV           0.000      0.002      0.017      0.987
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.526E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ POPULAR  ON
+    SEX              1.146       1.168       1.179       1.239       1.298       1.309       1.331
+
+ Residual Variances
+    POPULAR          0.506       0.519       0.525       0.558       0.591       0.597       0.610
+
+Between Level
+
+ B_EXTRAV ON
+    TEXP            -0.031      -0.029      -0.029      -0.025      -0.021      -0.020      -0.018
+
+ POPULAR  ON
+    TEXP             0.185       0.195       0.200       0.225       0.251       0.256       0.266
+
+ Intercepts
+    POPULAR         -1.901      -1.732      -1.646      -1.197      -0.748      -0.662      -0.494
+    B_EXTRAV         0.698       0.723       0.736       0.802       0.868       0.880       0.905
+
+ Residual Variances
+    POPULAR          0.109       0.150       0.171       0.280       0.389       0.410       0.451
+    B_EXTRAV        -0.004      -0.003      -0.002       0.000       0.003       0.003       0.004
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms of sample values
+  Scatterplots (sample values)
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  12:02:25
+        Ending Time:  12:02:26
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

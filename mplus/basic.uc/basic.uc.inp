@@ -1,0 +1,24 @@
+TITLE: pop2
+DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
+VARIABLE: NAMES = pupil class extrav sex texp popular poptch Zextrav Zsex Ztexp
+Zpopular Zpoptch Cextrav Ctexp Csex;
+
+MISSING=.;
+
+usevariables are popular;
+
+cluster is class;
+
+analysis: type is twolevel;
+!estimator= bayes;
+
+model:
+%within%
+popular;
+
+%between%
+popular;
+
+OUTPUT: TECH1 TECH8;
+PLOT: TYPE = PLOT2;

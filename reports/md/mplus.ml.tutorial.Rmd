@@ -1,0 +1,107 @@
+# MPlus Brownbag Multilevel Modeling Tutorial
+
+## Data:
+
+```{rdata, comment=NA,message=FALSE }
+load("~/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
+library(psych)
+library(xtable)
+library(arm)
+library(car)
+library(texreg)
+library(mice)
+str(pop2,give.attr=FALSE)
+```
+
+
+```{r descriptives, results='asis'}
+
+print(xtable(describe(pop2,interp=F,skew=F)),type="html")
+
+```
+
+## Add Unique ID variable
+
+```{r add ID, comment=NA}
+pop2$id <-(pop2$class*100) + pop2$pupil
+u.id <- unique(pop2$id)
+print(paste("# unique id variables =",length(u.id)))
+```
+
+
+```{r descriptives2, results='asis'}
+
+print(xtable(describe(pop2,interp=F,skew=F)),type="html")
+```
+
+```{r, head, comment=NA}
+some(pop2[,c(2,1,16)])
+
+```
+
+## historgrams
+
+```{r hists, }
+par(mfcol=c(2,2))
+hist(pop2$popular,col="red",breaks=10)
+hist(pop2$sex,col="red",breaks=2)
+hist(pop2$extrav,col="red",breaks=10)
+hist(pop2$texp,col="red",breaks=10)
+```
+
+## correlations
+
+```{r corrplot}
+corrplot(pop2[,3:6],color=TRUE)
+```
+
+
+## Research Question:
+
+
+Are extraverted students more popular than intraverted students?
+
+
+One OLS regression, ignoring nesting within classes:
+$$
+Y_{i}=\beta_{0} + \beta_{1} X_{1i} + \beta_{2} X_{2i} + e_{i}
+$$
+
+$$
+popularity_{i}=\beta_{0} + \beta_{1} sex_{1i} + \beta_{2} extraversion_{2i} + e_{i}
+$$
+
+separate OLS regression equation for each class:
+$$
+Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + e_{ij}
+$$
+$$
+popularity_{ij}=\beta_{0j} + \beta_{1j}sex_{1ij} + \beta_{2j}extraversion_{2ij} + e_{ij}
+$$
+
+```{r olsmods, results='asis'}
+np.mod <- lm(Zpopular ~ Zsex + Zextrav + Ztexp,pop2)
+tp.mod <- lm(Zpopular ~ Zsex + Zextrav + Ztexp + class,pop2)
+ml.mod <- lmer(Zpopular ~ Zsex + Zextrav + Ztexp + (1|class),pop2)
+mod.names <- c("1 OLS","100 OLS","MLM")
+htmlreg(list(np.mod,tp.mod,ml.mod),omit.coef="class",model.names=mod.names)
+```
+
+
+Intercept only model:
+
+level 1: 
+$$
+Y_{ij}=\beta_{0j}+e_{ij}
+$$
+
+level 2:
+$$
+\beta_{0j}=\gamma_{00}+u_{0j}
+$$
+
+Intraclass correlation (ICC):
+$$ 
+\rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
+$$
+
