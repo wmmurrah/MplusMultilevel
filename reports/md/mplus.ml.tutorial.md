@@ -42,7 +42,7 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
-<!-- Sat Mar 16 17:10:31 2013 -->
+<!-- Sat Mar 16 22:23:22 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -76,7 +76,7 @@ print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
-<!-- Sat Mar 16 17:10:31 2013 -->
+<!-- Sat Mar 16 22:23:22 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -96,16 +96,16 @@ some(pop2[, c(2, 1, 16)])
 
 ```
      class pupil   id
-61       4     3  403
-63       4     5  405
-298     15    15 1515
-534     26    19 2619
-612     31     2 3102
-629     31    20 3120
-815     41    11 4111
-895     45    15 4515
-1446    73     3 7303
-1517    77     2 7702
+308     16     1 1601
+329     17     5 1705
+431     21    20 2120
+464     23    10 2310
+504     25     9 2509
+569     28    13 2813
+731     36    18 3618
+938     47    16 4716
+1708    86    13 8613
+1766    89     5 8905
 ```
 
 
@@ -159,11 +159,11 @@ $$
 
 
 ```r
-np.mod <- lm(Zpopular ~ Zsex + Zextrav + Ztexp, pop2)
-tp.mod <- lm(Zpopular ~ Zsex + Zextrav + Ztexp + class, pop2)
-ml.mod <- lmer(Zpopular ~ Zsex + Zextrav + Ztexp + (1 | class), pop2)
+cp.mod <- lm(Zpopular ~ Zsex + Zextrav, pop2)
+np.mod <- lm(Zpopular ~ Zsex + Zextrav + class, pop2)
+ml.mod <- lmer(Zpopular ~ Zsex + Zextrav + (1 | class), pop2)
 mod.names <- c("1 OLS", "100 OLS", "MLM")
-htmlreg(list(np.mod, tp.mod, ml.mod), omit.coef = "class", model.names = mod.names)
+htmlreg(list(cp.mod, np.mod, ml.mod), omit.coef = "class", model.names = mod.names)
 ```
 
 
@@ -211,19 +211,19 @@ htmlreg(list(np.mod, tp.mod, ml.mod), omit.coef = "class", model.names = mod.nam
       <tr>
         <td>(Intercept)</td>
         <td>0.00</td>
-        <td>0.00</td>
+        <td>-0.06<sup>&middot;</sup></td>
         <td>0.00</td>
       </tr>
       <tr>
         <td></td>
         <td>(0.02)</td>
         <td>(0.03)</td>
-        <td>(0.04)</td>
+        <td>(0.06)</td>
       </tr>
       <tr>
         <td>Zsex</td>
-        <td>0.50<sup>***</sup></td>
-        <td>0.50<sup>***</sup></td>
+        <td>0.54<sup>***</sup></td>
+        <td>0.55<sup>***</sup></td>
         <td>0.45</td>
       </tr>
       <tr>
@@ -234,9 +234,9 @@ htmlreg(list(np.mod, tp.mod, ml.mod), omit.coef = "class", model.names = mod.nam
       </tr>
       <tr>
         <td>Zextrav</td>
-        <td>0.43<sup>***</sup></td>
-        <td>0.43<sup>***</sup></td>
-        <td>0.41</td>
+        <td>0.27<sup>***</sup></td>
+        <td>0.27<sup>***</sup></td>
+        <td>0.40</td>
       </tr>
       <tr>
         <td></td>
@@ -245,27 +245,15 @@ htmlreg(list(np.mod, tp.mod, ml.mod), omit.coef = "class", model.names = mod.nam
         <td>(0.01)</td>
       </tr>
       <tr>
-        <td>Ztexp</td>
-        <td>0.42<sup>***</sup></td>
-        <td>0.42<sup>***</sup></td>
-        <td>0.42</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>(0.02)</td>
-        <td>(0.02)</td>
-        <td>(0.04)</td>
-      </tr>
-      <tr>
         <td class="midRule">R<sup>2</sup></td>
-        <td class="midRule">0.54</td>
-        <td class="midRule">0.54</td>
+        <td class="midRule">0.39</td>
+        <td class="midRule">0.40</td>
         <td class="midRule"></td>
       </tr>
       <tr>
         <td>Adj. R<sup>2</sup></td>
-        <td>0.54</td>
-        <td>0.54</td>
+        <td>0.39</td>
+        <td>0.39</td>
         <td></td>
       </tr>
       <tr>
@@ -278,25 +266,25 @@ htmlreg(list(np.mod, tp.mod, ml.mod), omit.coef = "class", model.names = mod.nam
         <td>AIC</td>
         <td></td>
         <td></td>
-        <td>3601.14</td>
+        <td>3665.53</td>
       </tr>
       <tr>
         <td>BIC</td>
         <td></td>
         <td></td>
-        <td>3634.75</td>
+        <td>3693.53</td>
       </tr>
       <tr>
         <td>Log Likelihood</td>
         <td></td>
         <td></td>
-        <td>-1794.57</td>
+        <td>-1827.76</td>
       </tr>
       <tr>
         <td>Deviance</td>
         <td></td>
         <td></td>
-        <td>3589.14</td>
+        <td>3655.53</td>
       </tr>
       <tr>
         <td>Num. groups: class</td>
@@ -308,7 +296,7 @@ htmlreg(list(np.mod, tp.mod, ml.mod), omit.coef = "class", model.names = mod.nam
         <td>Variance: class.(Intercept)</td>
         <td></td>
         <td></td>
-        <td>0.15</td>
+        <td>0.33</td>
       </tr>
       <tr>
         <td class="bottomRule">Variance: Residual</td>
@@ -341,4 +329,217 @@ Intraclass correlation (ICC):
 $$ 
 \rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
 $$
+
+
+
+```r
+mod0 <- lmer(popular ~ 1 + (1 | class), pop2, REML = FALSE)
+mod1 <- lmer(popular ~ sex + extrav + (1 | class), pop2, REML = FALSE)
+mod2 <- lmer(popular ~ sex + extrav + texp + (1 + extrav | class), pop2, REML = FALSE)
+mod3 <- lmer(popular ~ sex + extrav * texp + (1 + extrav | class), pop2, REML = FALSE)
+mod.names <- c("unconditional", "level 1", "level 2", "interaction")
+htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+", 
+    caption = "Multilevel Models", caption.above = TRUE)
+```
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multilevel Models</title>
+    <style type="text/css">
+      table {
+        border: none;
+      }
+      th {
+        text-align: left;
+        border-top: 2px solid black;
+        border-bottom: 1px solid black;
+        padding-right: 12px;
+      }
+      .midRule {
+        border-top: 1px solid black;
+      }
+      .bottomRule {
+        border-bottom: 2px solid black;
+      }
+      td {
+        padding-right: 12px;
+        border: none;
+      }
+      caption span {
+        float: left;
+      }
+      sup {
+        vertical-align: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table cellspacing="0">
+      <caption align="top" style="margin-bottom:0.3em">Multilevel Models</caption>
+      <tr>
+        <th class="modelnames"></th>
+        <th><b>unconditional</b></th>
+        <th><b>level 1</b></th>
+        <th><b>level 2</b></th>
+        <th><b>interaction</b></th>
+      </tr>
+      <tr>
+        <td>(Intercept)</td>
+        <td>5.08</td>
+        <td>2.14</td>
+        <td>0.74</td>
+        <td>-1.21</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>(0.09)</td>
+        <td>(0.12)</td>
+        <td>(0.20)</td>
+        <td>(0.27)</td>
+      </tr>
+      <tr>
+        <td>sex</td>
+        <td></td>
+        <td>1.25</td>
+        <td>1.25</td>
+        <td>1.24</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>(0.04)</td>
+        <td>(0.04)</td>
+        <td>(0.04)</td>
+      </tr>
+      <tr>
+        <td>extrav</td>
+        <td></td>
+        <td>0.44</td>
+        <td>0.45</td>
+        <td>0.80</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>(0.02)</td>
+        <td>(0.02)</td>
+        <td>(0.04)</td>
+      </tr>
+      <tr>
+        <td>texp</td>
+        <td></td>
+        <td></td>
+        <td>0.09</td>
+        <td>0.23</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>(0.01)</td>
+        <td>(0.02)</td>
+      </tr>
+      <tr>
+        <td>extrav:texp</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-0.02</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>(0.00)</td>
+      </tr>
+      <tr>
+        <td class="midRule">AIC</td>
+        <td class="midRule">6333.47</td>
+        <td class="midRule">4943.95</td>
+        <td class="midRule">4828.81</td>
+        <td class="midRule">4765.62</td>
+      </tr>
+      <tr>
+        <td>BIC</td>
+        <td>6350.27</td>
+        <td>4971.96</td>
+        <td>4873.61</td>
+        <td>4816.03</td>
+      </tr>
+      <tr>
+        <td>Log Likelihood</td>
+        <td>-3163.73</td>
+        <td>-2466.98</td>
+        <td>-2406.40</td>
+        <td>-2373.81</td>
+      </tr>
+      <tr>
+        <td>Deviance</td>
+        <td>6327.47</td>
+        <td>4933.95</td>
+        <td>4812.81</td>
+        <td>4747.62</td>
+      </tr>
+      <tr>
+        <td>Num. obs.</td>
+        <td>2000</td>
+        <td>2000</td>
+        <td>2000</td>
+        <td>2000</td>
+      </tr>
+      <tr>
+        <td>Num. groups: class</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>Variance: class.(Intercept)</td>
+        <td>0.69</td>
+        <td>0.62</td>
+        <td>1.28</td>
+        <td>0.45</td>
+      </tr>
+      <tr>
+        <td>Variance: Residual</td>
+        <td>1.22</td>
+        <td>0.59</td>
+        <td>0.55</td>
+        <td>0.55</td>
+      </tr>
+      <tr>
+        <td class="bottomRule">Variance: class.extrav</td>
+        <td class="bottomRule"></td>
+        <td class="bottomRule"></td>
+        <td class="bottomRule">0.03</td>
+        <td class="bottomRule">0.00</td>
+      </tr>
+      <tr>
+        <td colspan="5"><span style="font-size:0.8em"><sup>***</sup>p &lt; 0.001, <sup>**</sup>p &lt; 0.01, <sup>*</sup>p &lt; 0.05, <sup>+</sup>p &lt; 0.1</span></td>
+      </tr>
+     </table>
+  </body>
+</html>
+
+
+
+## Preparing pop2 data for Mplus in R
+
+```r
+# The foreign package contains many functions to import various types of
+# data from other stats programs.
+library(foreign)
+# use this command to read in an SPSS file:
+pop2 <- read.spss(file = "data/popular2.sav")
+# The following command creates a .dat file and and .inp file with the
+# basic Mplus code.
+library(MplusAutomation)
+prepareMplusData(df = popular2, filename = "data/popular2.dat", inpfile = "mplus/popular2.bare.inp")
+```
+
 

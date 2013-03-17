@@ -1,0 +1,6 @@
+TITLE: Your title goes here
+DATA: FILE = "data/pop2md.dat";
+VARIABLE: NAMES = pupil class extrav sex texp popular popteach Zextrav Zsex Ztexp
+     Zpopular Zpopteach Cextrav Ctexp Csex id;
+
+MISSING=.;
