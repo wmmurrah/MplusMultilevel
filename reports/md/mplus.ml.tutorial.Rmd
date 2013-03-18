@@ -3,13 +3,12 @@
 ## Data:
 
 ```{rdata, comment=NA,message=FALSE }
-load("~/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
+load("C:/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
 library(psych)
 library(xtable)
 library(arm)
 library(car)
 library(texreg)
-library(mice)
 str(pop2,give.attr=FALSE)
 ```
 
@@ -20,11 +19,12 @@ print(xtable(describe(pop2[,1:6],interp=F,skew=F)),type="html")
 
 ```
 
-## Add Unique ID variable
+## Change 'sex' to 'female' and add Unique ID variable 
 
 ```{r add ID, comment=NA}
 pop2$id <-(pop2$class*100) + pop2$pupil
 u.id <- unique(pop2$id)
+names(pop2)[4] <- "female"
 print(paste("# unique id variables =",length(u.id)))
 ```
 
@@ -35,7 +35,7 @@ print(xtable(describe(pop2[,c(1:6,16)],interp=F,skew=F)),type="html")
 ```
 
 ```{r, head, comment=NA}
-some(pop2[,c(2,1,16)])
+some(pop2[,c(2,1,16)],n=20)
 
 ```
 
@@ -44,7 +44,7 @@ some(pop2[,c(2,1,16)])
 ```{r hists, }
 par(mfcol=c(2,2))
 hist(pop2$popular,col="red",breaks=10)
-hist(pop2$sex,col="red",breaks=2)
+hist(pop2$female,col="red",breaks=2)
 hist(pop2$extrav,col="red",breaks=10)
 hist(pop2$texp,col="red",breaks=10)
 ```
@@ -52,6 +52,7 @@ hist(pop2$texp,col="red",breaks=10)
 ## correlations
 
 ```{r corrplot}
+# corrplot is found in the 'arm' package
 corrplot(pop2[,3:6],color=TRUE)
 ```
 
@@ -60,31 +61,96 @@ corrplot(pop2[,3:6],color=TRUE)
 
 
 Are extraverted students more popular than intraverted students?
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-
-One OLS regression, ignoring nesting within classes:
+One OLS regression, ignoring nesting within classes (n=2000):
 $$
 Y_{i}=\beta_{0} + \beta_{1} X_{1i} + \beta_{2} X_{2i} + e_{i}
 $$
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+$$
+popularity_{i}=\beta_{0} + \beta_{1} female_{1i} + \beta_{2} extraversion_{2i} + e_{i}
+$$
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+OLS at class level (n=100):
 $$
-popularity_{i}=\beta_{0} + \beta_{1} sex_{1i} + \beta_{2} extraversion_{2i} + e_{i}
+\bar{Y}_{j}=\beta_{0} + \beta_{1} \bar{X}_{1j} + \beta_{2} \bar{X}_{2j} + e_{j}
 $$
+<br />
+<br />
+<br />
+<br />
+<br />
+$$
+mean.popularity_{j}=\beta_{0} + \beta_{1} mean.female_{1j} + \beta_{2} mean.extraversion_{2j} + e_{j}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 separate OLS regression equation for each class:
 $$
 Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + e_{ij}
 $$
-$$
-popularity_{ij}=\beta_{0j} + \beta_{1j}sex_{1ij} + \beta_{2j}extraversion_{2ij} + e_{ij}
-$$
+<br />
+<br />
+<br />
+<br />
+<br />
 
+$$
+popularity_{ij}=\beta_{0j} + \beta_{1j}female_{1ij} + \beta_{2j}extraversion_{2ij} + e_{ij}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
 ```{r olsmods, results='asis'}
-cp.mod <- lm(Zpopular ~ Zsex + Zextrav ,pop2)
-np.mod <- lm(Zpopular ~ Zsex + Zextrav + class,pop2)
-ml.mod <- lmer(Zpopular ~ Zsex + Zextrav + (1|class),pop2)
+
+cp.mod <- lm(popular ~ female + extrav ,pop2)
+
+ag.pop2 <- aggregate(pop2,by=list(pop2$class),FUN=mean)
+np1.mod <- lm(popular ~ female + extrav ,ag.pop2)
+np2.mod <- lm(popular ~ female + extrav + class,pop2)
+ml.mod <- lmer(popular ~ female + extrav + (1|class),pop2)
 mod.names <- c("1 OLS","100 OLS","MLM")
-htmlreg(list(cp.mod,np.mod,ml.mod),omit.coef="class",model.names=mod.names)
+htmlreg(list(cp.mod,np1.mod,np2.mod,ml.mod),omit.coef="class")
 ```
 
 
@@ -94,24 +160,46 @@ level 1:
 $$
 Y_{ij}=\beta_{0j}+e_{ij}
 $$
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 level 2:
 $$
 \beta_{0j}=\gamma_{00}+u_{0j}
 $$
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 Intraclass correlation (ICC):
 $$ 
 \rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
 $$
-
+<br />
+<br />
+<br />
+<br />
+<br />
 
 ```{r mlmods, results='asis', comment=NA, message=FALSE}
 mod0 <- lmer(popular ~ 1 + (1 |class), pop2,REML=FALSE)
-mod1 <- lmer(popular ~ sex + extrav + (1 |class), pop2,REML=FALSE)
-mod2 <- lmer(popular ~ sex + extrav + texp + (1 + extrav|class),
+mod1 <- lmer(popular ~ female + extrav + (1 |class), pop2,REML=FALSE)
+mod2 <- lmer(popular ~ female + extrav + texp + (1 + extrav|class),
              pop2,REML=FALSE)
-mod3 <- lmer(popular ~ sex + extrav*texp + (1+ extrav|class),
+mod3 <- lmer(popular ~ female + extrav*texp + (1+ extrav|class),
              pop2,REML=FALSE)
 mod.names <- c("unconditional","level 1","level 2","interaction")
 htmlreg(list(mod0,mod1,mod2,mod3),model.names=mod.names,symbol="+",
@@ -125,7 +213,10 @@ htmlreg(list(mod0,mod1,mod2,mod3),model.names=mod.names,symbol="+",
 # various types of data from other stats programs.
 library(foreign)
 # use this command to read in an SPSS file:
-pop2 <- read.spss(file="data/popular2.sav") 
+popular2 <- read.spss(file="data/popular2.sav",
+                  use.value.labels=FALSE,
+                  to.data.frame=TRUE
+                  ,use.missings=TRUE) 
 # The following command creates a .dat file and
 # and .inp file with the basic Mplus code.
 library(MplusAutomation)
