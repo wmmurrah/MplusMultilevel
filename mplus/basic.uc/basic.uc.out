@@ -1,11 +1,11 @@
-Mplus VERSION 7
+Mplus VERSION 7 (Linux)
 MUTHEN & MUTHEN
-03/07/2013   9:31 AM
+03/17/2013  12:12 PM
 
 INPUT INSTRUCTIONS
 
   TITLE: pop2
-  DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+  DATA: FILE = "~/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
   Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
   VARIABLE: NAMES = pupil class extrav sex texp popular poptch Zextrav Zsex Ztexp
   Zpopular Zpoptch Cextrav Ctexp Csex;
@@ -26,7 +26,7 @@ INPUT INSTRUCTIONS
   %between%
   popular;
 
-  OUTPUT: TECH1 TECH8;
+  OUTPUT: TECH1 TECH8 residual;
   PLOT: TYPE = PLOT2;
 
 
@@ -76,7 +76,7 @@ Convergence criterion for H1                             0.100D-03
 Optimization algorithm                                         EMA
 
 Input data file(s)
-  C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicM
+  ~/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicMo
 Input data format  FREE
 
 
@@ -195,6 +195,63 @@ QUALITY OF NUMERICAL RESULTS
        (ratio of smallest to largest eigenvalue)
 
 
+RESIDUAL OUTPUT
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED) FOR WITHIN
+
+
+           Model Estimated Means
+              POPULAR
+              ________
+ 1              0.000
+
+
+           Residuals for Means
+              POPULAR
+              ________
+ 1              0.000
+
+
+           Model Estimated Covariances
+              POPULAR
+              ________
+ POPULAR        1.222
+
+
+           Residuals for Covariances
+              POPULAR
+              ________
+ POPULAR        0.000
+
+
+     ESTIMATED MODEL AND RESIDUALS (OBSERVED - ESTIMATED) FOR BETWEEN
+
+
+           Model Estimated Means
+              POPULAR
+              ________
+ 1              5.078
+
+
+           Residuals for Means
+              POPULAR
+              ________
+ 1              0.000
+
+
+           Model Estimated Covariances
+              POPULAR
+              ________
+ POPULAR        0.695
+
+
+           Residuals for Covariances
+              POPULAR
+              ________
+ POPULAR        0.000
+
+
 TECHNICAL 1 OUTPUT
 
 
@@ -294,15 +351,9 @@ The following plots are available:
 
   No plots are available
 
-DIAGRAM INFORMATION
-
-  Mplus diagrams are currently not available for multilevel analysis.
-  No diagram output was produced.
-
-
-     Beginning Time:  09:31:16
-        Ending Time:  09:31:18
-       Elapsed Time:  00:00:02
+     Beginning Time:  12:12:19
+        Ending Time:  12:12:20
+       Elapsed Time:  00:00:01
 
 
 

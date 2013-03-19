@@ -1,5 +1,5 @@
-------Begin Mplus Model Run: 04Oct2012 20:52:02------
-Target directory: /home/wmmurrah/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/basic.uc
+------Begin Mplus Model Run: 17Mar2013 12:12:19------
+Target directory: /home/wmmurrah/RStudioProjects/MplusTutorials/MplusMultilevel/mplus/basic.uc
 Run options:
 	Recursive (run models in subdirectories): FALSE
 	Show output on console: FALSE
@@ -7,4 +7,4 @@ Run options:
 ------
 Currently running model: basic.uc.inp
 
-------End Mplus Model Run: 04Oct2012 20:52:03------
+------End Mplus Model Run: 17Mar2013 12:12:20------
