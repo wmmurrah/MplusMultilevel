@@ -2,8 +2,8 @@
 
 ## Data:
 
-```{rdata, comment=NA,message=FALSE }
-load("~/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
+```{rdata, comment=NA,message=FALSE,warning=FALSE}
+load("C:/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
 library(psych)
 library(xtable)
 library(arm)
@@ -57,7 +57,7 @@ hist(pop2$texp,col="red",breaks=10)
 corrplot(pop2[,3:6],color=TRUE)
 ```
 
-```{r pairplot}
+```{r pairplot, cache=TRUE}
 ggpairs(pop2[,3:6])
 ```
 
@@ -152,10 +152,16 @@ cp.mod <- lm(popular ~ female + extrav ,pop2)
 
 ag.pop2 <- aggregate(pop2,by=list(pop2$class),FUN=mean)
 np1.mod <- lm(popular ~ female + extrav ,ag.pop2)
-np2.mod <- lm(popular ~ female + extrav + class,pop2)
+np2.mod <- lm(popular ~ female + extrav + factor(class),pop2)
 ml.mod <- lmer(popular ~ female + extrav + (1|class),pop2)
-mod.names <- c("1 OLS","100 OLS","MLM")
-htmlreg(list(cp.mod,np1.mod,np2.mod,ml.mod),omit.coef="class")
+mod.names <- c("1 OLS","lvl 2 OLS","OLS w/class as IV","MLM")
+htmlreg(list(cp.mod,np1.mod,np2.mod,ml.mod),omit.coef="class",model.names=mod.names)
+
+class.coefs <- as.data.frame(cbind(coef(np2.mod)[c(1,4:22)],se.coef(np2.mod)[c(4:22)]))
+names(class.coefs) <- c("coefficient","s.e.")
+print(xtable(class.coefs,caption="First 20 class coefficients"),type="html")
+paste("Range of class coefficients = ",range(coef(np2.mod)[4:102]))
+paste("s.e. class coefficient = ",mean(se.coef(np2.mod)[4:102]))
 ```
 
 
