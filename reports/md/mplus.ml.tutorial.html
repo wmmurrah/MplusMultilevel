@@ -228,7 +228,7 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = &quot;html&quo
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
 
-<!-- Sat Mar 30 07:21:09 2013 -->
+<!-- Tue Apr  2 14:15:10 2013 -->
 
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
@@ -242,9 +242,9 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = &quot;html&quo
 
 <h2>Change &#39;sex&#39; to &#39;female&#39; and add Unique ID variable</h2>
 
-<pre><code class="r">pop2$id &lt;- (pop2$class * 100) + pop2$pupil
+<pre><code class="r">names(pop2)[4] &lt;- &quot;female&quot;
+pop2$id &lt;- (pop2$class * 100) + pop2$pupil
 u.id &lt;- unique(pop2$id)
-names(pop2)[4] &lt;- &quot;female&quot;
 print(paste(&quot;# unique id variables =&quot;, length(u.id)))
 </code></pre>
 
@@ -257,7 +257,7 @@ print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = &quot;h
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
 
-<!-- Sat Mar 30 07:21:09 2013 -->
+<!-- Tue Apr  2 14:15:10 2013 -->
 
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
@@ -273,27 +273,27 @@ print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = &quot;h
 <pre><code class="r">some(pop2[, c(2, 1, 16)], n = 20)
 </code></pre>
 
-<pre><code>     class pupil    id
-19       1    19   119
-240     12    11  1211
-386     19    16  1916
-471     23    17  2317
-550     27    14  2714
-563     28     7  2807
-571     28    15  2815
-625     31    16  3116
-703     35    10  3510
-705     35    12  3512
-720     36     7  3607
-907     46     8  4608
-1018    51    20  5120
-1129    57     7  5707
-1249    63    12  6312
-1363    69     2  6902
-1522    77     7  7707
-1898    96     4  9604
-1980    99    23  9923
-1990   100    10 10010
+<pre><code>     class pupil   id
+74       4    16  416
+351     18     1 1801
+358     18     8 1808
+496     25     1 2501
+590     29    15 2915
+593     29    18 2918
+660     33     8 3308
+680     34     9 3409
+777     39     9 3909
+847     43     3 4303
+1047    53     3 5303
+1064    54     1 5401
+1138    57    16 5716
+1310    66     7 6607
+1523    77     8 7708
+1676    85     3 8503
+1738    87    21 8721
+1778    89    17 8917
+1847    93    10 9310
+1932    97    17 9717
 </code></pre>
 
 <h2>historgrams</h2>

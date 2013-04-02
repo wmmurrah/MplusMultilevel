@@ -53,7 +53,7 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
-<!-- Sat Mar 30 07:21:09 2013 -->
+<!-- Tue Apr  2 14:15:10 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -69,9 +69,9 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = "html")
 
 
 ```r
+names(pop2)[4] <- "female"
 pop2$id <- (pop2$class * 100) + pop2$pupil
 u.id <- unique(pop2$id)
-names(pop2)[4] <- "female"
 print(paste("# unique id variables =", length(u.id)))
 ```
 
@@ -88,7 +88,7 @@ print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
-<!-- Sat Mar 30 07:21:09 2013 -->
+<!-- Tue Apr  2 14:15:10 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -107,27 +107,27 @@ some(pop2[, c(2, 1, 16)], n = 20)
 ```
 
 ```
-     class pupil    id
-19       1    19   119
-240     12    11  1211
-386     19    16  1916
-471     23    17  2317
-550     27    14  2714
-563     28     7  2807
-571     28    15  2815
-625     31    16  3116
-703     35    10  3510
-705     35    12  3512
-720     36     7  3607
-907     46     8  4608
-1018    51    20  5120
-1129    57     7  5707
-1249    63    12  6312
-1363    69     2  6902
-1522    77     7  7707
-1898    96     4  9604
-1980    99    23  9923
-1990   100    10 10010
+     class pupil   id
+74       4    16  416
+351     18     1 1801
+358     18     8 1808
+496     25     1 2501
+590     29    15 2915
+593     29    18 2918
+660     33     8 3308
+680     34     9 3409
+777     39     9 3909
+847     43     3 4303
+1047    53     3 5303
+1064    54     1 5401
+1138    57    16 5716
+1310    66     7 6607
+1523    77     8 7708
+1676    85     3 8503
+1738    87    21 8721
+1778    89    17 8917
+1847    93    10 9310
+1932    97    17 9717
 ```
 
 

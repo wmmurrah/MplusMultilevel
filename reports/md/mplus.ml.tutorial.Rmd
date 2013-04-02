@@ -23,9 +23,9 @@ print(xtable(describe(pop2[,1:6],interp=F,skew=F)),type="html")
 ## Change 'sex' to 'female' and add Unique ID variable 
 
 ```{r add ID, comment=NA}
+names(pop2)[4] <- "female"
 pop2$id <-(pop2$class*100) + pop2$pupil
 u.id <- unique(pop2$id)
-names(pop2)[4] <- "female"
 print(paste("# unique id variables =",length(u.id)))
 ```
 
