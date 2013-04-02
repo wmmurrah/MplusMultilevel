@@ -3,12 +3,13 @@
 ## Data:
 
 ```{rdata, comment=NA,message=FALSE }
-load("C:/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
+load("~/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
 library(psych)
 library(xtable)
 library(arm)
 library(car)
 library(texreg)
+library(GGally)
 str(pop2,give.attr=FALSE)
 ```
 
@@ -54,6 +55,10 @@ hist(pop2$texp,col="red",breaks=10)
 ```{r corrplot}
 # corrplot is found in the 'arm' package
 corrplot(pop2[,3:6],color=TRUE)
+```
+
+```{r pairplot}
+ggpairs(pop2[,3:6])
 ```
 
 
