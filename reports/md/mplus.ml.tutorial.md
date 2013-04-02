@@ -41,7 +41,7 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Mon Mar 18 10:42:57 2013 -->
+<!-- Wed Mar 27 16:45:47 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -57,9 +57,9 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = "html")
 
 
 ```r
+names(pop2)[4] <- "female"
 pop2$id <- (pop2$class * 100) + pop2$pupil
 u.id <- unique(pop2$id)
-names(pop2)[4] <- "female"
 print(paste("# unique id variables =", length(u.id)))
 ```
 
@@ -76,7 +76,7 @@ print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Mon Mar 18 10:42:57 2013 -->
+<!-- Wed Mar 27 16:45:48 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -96,26 +96,26 @@ some(pop2[, c(2, 1, 16)], n = 20)
 
 ```
      class pupil   id
-411     20    21 2021
-443     22     9 2209
-480     24     4 2404
-525     26    10 2610
-608     30    15 3015
-654     33     2 3302
-671     33    19 3319
-801     40    17 4017
-816     41    12 4112
-849     43     5 4305
-972     49    14 4914
-1100    55    18 5518
-1118    56    15 5615
-1231    62    14 6214
-1308    66     5 6605
-1361    68    17 6817
-1508    76    11 7611
-1558    79     6 7906
-1892    95    19 9519
-1929    97    14 9714
+132      7    10  710
+144      8     1  801
+235     12     6 1206
+377     19     6 1906
+438     22     4 2204
+745     37    13 3713
+887     45     7 4507
+1050    53     6 5306
+1073    54    10 5410
+1172    59    12 5912
+1179    60     2 6002
+1331    67     8 6708
+1446    73     3 7303
+1454    73    11 7311
+1611    81    19 8119
+1612    81    20 8120
+1634    82    21 8221
+1691    85    18 8518
+1774    89    13 8913
+1808    91     6 9106
 ```
 
 
