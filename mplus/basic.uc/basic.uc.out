@@ -1,11 +1,11 @@
-Mplus VERSION 7 (Linux)
+Mplus VERSION 7
 MUTHEN & MUTHEN
-03/17/2013  12:12 PM
+04/03/2013   2:16 PM
 
 INPUT INSTRUCTIONS
 
-  TITLE: pop2
-  DATA: FILE = "~/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+  TITLE: pop2 Multilevel: Unconditional Model
+  DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
   Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
   VARIABLE: NAMES = pupil class extrav sex texp popular poptch Zextrav Zsex Ztexp
   Zpopular Zpoptch Cextrav Ctexp Csex;
@@ -40,7 +40,7 @@ INPUT INSTRUCTIONS
 
 
 
-pop2
+pop2 Multilevel: Unconditional Model
 
 SUMMARY OF ANALYSIS
 
@@ -76,7 +76,7 @@ Convergence criterion for H1                             0.100D-03
 Optimization algorithm                                         EMA
 
 Input data file(s)
-  ~/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicMo
+  C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicM
 Input data format  FREE
 
 
@@ -351,9 +351,15 @@ The following plots are available:
 
   No plots are available
 
-     Beginning Time:  12:12:19
-        Ending Time:  12:12:20
-       Elapsed Time:  00:00:01
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  14:16:24
+        Ending Time:  14:16:24
+       Elapsed Time:  00:00:00
 
 
 

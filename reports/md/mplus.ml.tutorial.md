@@ -42,7 +42,7 @@ print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Tue Apr 02 16:20:39 2013 -->
+<!-- Wed Apr 03 13:47:22 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -77,7 +77,7 @@ print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Tue Apr 02 16:20:39 2013 -->
+<!-- Wed Apr 03 13:47:22 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -98,25 +98,25 @@ some(pop2[, c(2, 1, 16)], n = 20)
 ```
      class pupil   id
 156      8    13  813
-354     18     4 1804
-429     21    18 2118
-452     22    18 2218
-455     23     1 2301
-486     24    10 2410
-629     31    20 3120
-638     32     9 3209
-845     43     1 4301
-1116    56    13 5613
-1186    60     9 6009
-1344    67    21 6721
-1601    81     9 8109
-1670    84    18 8418
-1742    88     4 8804
-1746    88     8 8808
-1809    91     7 9107
-1816    91    14 9114
+214     11     7 1107
+234     12     5 1205
+436     22     2 2202
+461     23     7 2307
+531     26    16 2616
+576     28    20 2820
+706     35    13 3513
+846     43     2 4302
+885     45     5 4505
+889     45     9 4509
+964     49     6 4906
+1135    57    13 5713
+1188    60    11 6011
+1222    62     5 6205
+1338    67    15 6715
+1685    85    12 8512
+1724    87     7 8707
+1764    89     3 8903
 1832    92    12 9212
-1975    99    18 9918
 ```
 
 
@@ -241,14 +241,19 @@ $$
 
 ```r
 
-cp.mod <- lm(popular ~ female + extrav, pop2)
-
+# aggregate data frame to level 2 variables
 ag.pop2 <- aggregate(pop2, by = list(pop2$class), FUN = mean)
-np1.mod <- lm(popular ~ female + extrav, ag.pop2)
-np2.mod <- lm(popular ~ female + extrav + factor(class), pop2)
+ols <- lm(popular ~ female + extrav, pop2)
+
+# Models
+aggregate.ols.mod <- lm(popular ~ female + extrav, ag.pop2)
+ols.classIV.mod <- lm(popular ~ female + extrav + factor(class), pop2)
 ml.mod <- lmer(popular ~ female + extrav + (1 | class), pop2)
 mod.names <- c("1 OLS", "lvl 2 OLS", "OLS w/class as IV", "MLM")
-htmlreg(list(cp.mod, np1.mod, np2.mod, ml.mod), omit.coef = "class", model.names = mod.names)
+
+# make table
+htmlreg(list(ols, aggregate.ols.mod, ols.classIV.mod, ml.mod), omit.coef = "class", 
+    model.names = mod.names)
 ```
 
 
@@ -415,50 +420,54 @@ htmlreg(list(cp.mod, np1.mod, np2.mod, ml.mod), omit.coef = "class", model.names
 
 ```r
 
-class.coefs <- as.data.frame(cbind(coef(np2.mod)[c(1, 4:22)], se.coef(np2.mod)[c(4:22)]))
+# show class coefficients
+
+ols.classIV.noInt.mod <- lm(popular ~ factor(class) + female + extrav - 1, pop2)
+class.coefs <- as.data.frame(cbind(coef(ols.classIV.noInt.mod)[c(1:20)], se.coef(ols.classIV.noInt.mod)[c(1:20)]))
 names(class.coefs) <- c("coefficient", "s.e.")
 print(xtable(class.coefs, caption = "First 20 class coefficients"), type = "html")
 ```
 
 <!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
-<!-- Tue Apr 02 16:20:40 2013 -->
+<!-- Wed Apr 03 13:47:24 2013 -->
 <TABLE border=1>
 <CAPTION ALIGN="bottom"> First 20 class coefficients </CAPTION>
 <TR> <TH>  </TH> <TH> coefficient </TH> <TH> s.e. </TH>  </TR>
-  <TR> <TD align="right"> (Intercept) </TD> <TD align="right"> 2.27 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)2 </TD> <TD align="right"> -0.97 </TD> <TD align="right"> 0.25 </TD> </TR>
-  <TR> <TD align="right"> factor(class)3 </TD> <TD align="right"> -0.76 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)4 </TD> <TD align="right"> 0.52 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)5 </TD> <TD align="right"> -0.21 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)6 </TD> <TD align="right"> -0.81 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)7 </TD> <TD align="right"> -0.87 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)8 </TD> <TD align="right"> -1.48 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)9 </TD> <TD align="right"> -0.40 </TD> <TD align="right"> 0.23 </TD> </TR>
-  <TR> <TD align="right"> factor(class)10 </TD> <TD align="right"> 0.14 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)11 </TD> <TD align="right"> -0.73 </TD> <TD align="right"> 0.25 </TD> </TR>
-  <TR> <TD align="right"> factor(class)12 </TD> <TD align="right"> -0.53 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)13 </TD> <TD align="right"> 0.83 </TD> <TD align="right"> 0.26 </TD> </TR>
-  <TR> <TD align="right"> factor(class)14 </TD> <TD align="right"> -1.71 </TD> <TD align="right"> 0.23 </TD> </TR>
-  <TR> <TD align="right"> factor(class)15 </TD> <TD align="right"> -0.44 </TD> <TD align="right"> 0.25 </TD> </TR>
-  <TR> <TD align="right"> factor(class)16 </TD> <TD align="right"> -1.05 </TD> <TD align="right"> 0.23 </TD> </TR>
-  <TR> <TD align="right"> factor(class)17 </TD> <TD align="right"> 0.08 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)18 </TD> <TD align="right"> 1.25 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)19 </TD> <TD align="right"> 0.52 </TD> <TD align="right"> 0.24 </TD> </TR>
-  <TR> <TD align="right"> factor(class)20 </TD> <TD align="right"> -0.17 </TD> <TD align="right"> 0.24 </TD> </TR>
+  <TR> <TD align="right"> factor(class)1 </TD> <TD align="right"> 2.27 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)2 </TD> <TD align="right"> 1.30 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)3 </TD> <TD align="right"> 1.51 </TD> <TD align="right"> 0.20 </TD> </TR>
+  <TR> <TD align="right"> factor(class)4 </TD> <TD align="right"> 2.79 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)5 </TD> <TD align="right"> 2.05 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)6 </TD> <TD align="right"> 1.46 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)7 </TD> <TD align="right"> 1.39 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)8 </TD> <TD align="right"> 0.78 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)9 </TD> <TD align="right"> 1.86 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)10 </TD> <TD align="right"> 2.40 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)11 </TD> <TD align="right"> 1.54 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)12 </TD> <TD align="right"> 1.74 </TD> <TD align="right"> 0.20 </TD> </TR>
+  <TR> <TD align="right"> factor(class)13 </TD> <TD align="right"> 3.09 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)14 </TD> <TD align="right"> 0.55 </TD> <TD align="right"> 0.22 </TD> </TR>
+  <TR> <TD align="right"> factor(class)15 </TD> <TD align="right"> 1.82 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)16 </TD> <TD align="right"> 1.21 </TD> <TD align="right"> 0.21 </TD> </TR>
+  <TR> <TD align="right"> factor(class)17 </TD> <TD align="right"> 2.34 </TD> <TD align="right"> 0.17 </TD> </TR>
+  <TR> <TD align="right"> factor(class)18 </TD> <TD align="right"> 3.51 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)19 </TD> <TD align="right"> 2.79 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)20 </TD> <TD align="right"> 2.09 </TD> <TD align="right"> 0.19 </TD> </TR>
    </TABLE>
 
 ```r
-paste("Range of class coefficients = ", range(coef(np2.mod)[4:102]))
+paste("Range of class coefficients = ", round(range(coef(ols.classIV.noInt.mod)[1:100])[1], 
+    2), " to ", round(range(coef(ols.classIV.noInt.mod)[1:100])[2], 2))
 ```
 
-[1] "Range of class coefficients =  -2.207831582969" 
-[2] "Range of class coefficients =  1.60181522663956"
+[1] "Range of class coefficients =  0.06  to  3.87"
 
 ```r
-paste("s.e. class coefficient = ", mean(se.coef(np2.mod)[4:102]))
+paste(" mean s.e. of class coefficients = ", round(mean(se.coef(ols.classIV.noInt.mod)[1:100]), 
+    2))
 ```
 
-[1] "s.e. class coefficient =  0.244293441647665"
+[1] " mean s.e. of class coefficients =  0.19"
 
 
 
