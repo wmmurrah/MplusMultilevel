@@ -1,0 +1,34 @@
+TITLE: pop2
+DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
+VARIABLE: NAMES = pupil class extrav female texp popular poptch Zextrav Zsex Ztexp
+Zpopular Zpoptch Cextrav Ctexp Csex;
+
+MISSING=.;
+
+usevariables are popular female extrav texp;
+
+cluster is class;
+within is female extrav;
+between is texp;
+define:
+ center extrav texp (grandmean);
+
+
+analysis: type is twolevel random;
+
+model:
+%within%
+popular on female;
+rs_ex | popular on extrav;
+
+
+%between%
+popular on texp;
+rs_ex on texp;
+popular with rs_ex;
+
+OUTPUT:  SAMPSTAT CINTERVAL;
+
+Plot: type = plot1;
+

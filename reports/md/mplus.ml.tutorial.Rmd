@@ -65,7 +65,7 @@ ggpairs(pop2[,3:6])
 ## Research Question:
 
 
-Are extraverted students more popular than intraverted students?
+### Are extraverted students more popular than intraverted students?
 <br />
 <br />
 <br />
@@ -105,29 +105,6 @@ $$
 <br />
 <br />
 <br />
-OLS at class level (n=100):
-$$
-\bar{Y}_{j}=\beta_{0} + \beta_{1} \bar{X}_{1j} + \beta_{2} \bar{X}_{2j} + e_{j}
-$$
-<br />
-<br />
-<br />
-<br />
-<br />
-$$
-mean.popularity_{j}=\beta_{0} + \beta_{1} mean.female_{1j} + \beta_{2} mean.extraversion_{2j} + e_{j}
-$$
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
 separate OLS regression equation for each class:
 $$
 Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + e_{ij}
@@ -146,20 +123,36 @@ $$
 <br />
 <br />
 <br />
+
+ -or-
+ $$
+Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + \beta_{3j}X_{3j} + ... + e_{ij}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
+ $$
+popularity_{ij}=\beta_{0j} + \beta_{1j}female_{1ij} + \beta_{2j}extraversion_{2ij}  + \beta_{3j}class_{3j} + ... + e_{ij}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ```{r olsmods, results='asis'}
 
-# aggregate data frame to level 2 variables
-ag.pop2 <- aggregate(pop2,by=list(pop2$class),FUN=mean)
-ols <- lm(popular ~ female + extrav ,pop2)
 
 # Models
-aggregate.ols.mod <- lm(popular ~ female + extrav ,ag.pop2)
+ols <- lm(popular ~ female + extrav, pop2)
 ols.classIV.mod <- lm(popular ~ female + extrav + factor(class),pop2)
 ml.mod <- lmer(popular ~ female + extrav + (1|class),pop2)
-mod.names <- c("1 OLS","lvl 2 OLS","OLS w/class as IV","MLM")
+mod.names <- c("OLS","OLS w/class as IV","MLM")
 
 # make table
-htmlreg(list(ols,aggregate.ols.mod,ols.classIV.mod,ml.mod),omit.coef="class",model.names=mod.names)
+htmlreg(list(ols,ols.classIV.mod,ml.mod),omit.coef="class",model.names=mod.names)
 
 # show class coefficients
 
@@ -203,15 +196,21 @@ $$
 <br />
 <br />
 <br />
-Intraclass correlation (ICC):
-$$ 
-\rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
+
+combined:
+$$
+Y_{ij}=\gamma_{00}+u_{0j} + e_{ij}
 $$
 <br />
 <br />
 <br />
 <br />
 <br />
+Intraclass correlation (ICC):
+$$ 
+\rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
+$$
+
 
 ```{r mlmods, results='asis', comment=NA, message=FALSE}
 mod0 <- lmer(popular ~ 1 + (1 |class), pop2,REML=FALSE)
@@ -220,8 +219,10 @@ mod2 <- lmer(popular ~ female + extrav + texp + (1 + extrav|class),
              pop2,REML=FALSE)
 mod3 <- lmer(popular ~ female + extrav*texp + (1+ extrav|class),
              pop2,REML=FALSE)
-mod.names <- c("unconditional","level 1","level 2","interaction")
-htmlreg(list(mod0,mod1,mod2,mod3),model.names=mod.names,symbol="+",
+mod4 <- lmer(popular ~ female + Cextrav*Ctexp + (1 + Cextrav |class),pop2, REML=F)
+names(mod4@fixef)[3:5] <- c("extrav","texp","extrav:texp")
+mod.names <- c("unconditional","level 1","level 2","interaction","int. vars. centered")
+htmlreg(list(mod0,mod1,mod2,mod3,mod4),model.names=mod.names,symbol="+",
         caption="Multilevel Models",caption.above=TRUE)
 ```
 
