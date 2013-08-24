@@ -2,8 +2,8 @@
 
 ## Data:
 
-```{rdata, comment=NA,message=FALSE }
-load("~/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
+```{rdata, comment=NA,message=FALSE,warning=FALSE}
+load("C:/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
 library(psych)
 library(xtable)
 library(arm)
@@ -57,7 +57,7 @@ hist(pop2$texp,col="red",breaks=10)
 corrplot(pop2[,3:6],color=TRUE)
 ```
 
-```{r pairplot}
+```{r pairplot, cache=TRUE}
 ggpairs(pop2[,3:6])
 ```
 
@@ -65,7 +65,7 @@ ggpairs(pop2[,3:6])
 ## Research Question:
 
 
-Are extraverted students more popular than intraverted students?
+### Are extraverted students more popular than intraverted students?
 <br />
 <br />
 <br />
@@ -105,29 +105,6 @@ $$
 <br />
 <br />
 <br />
-OLS at class level (n=100):
-$$
-\bar{Y}_{j}=\beta_{0} + \beta_{1} \bar{X}_{1j} + \beta_{2} \bar{X}_{2j} + e_{j}
-$$
-<br />
-<br />
-<br />
-<br />
-<br />
-$$
-mean.popularity_{j}=\beta_{0} + \beta_{1} mean.female_{1j} + \beta_{2} mean.extraversion_{2j} + e_{j}
-$$
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
 separate OLS regression equation for each class:
 $$
 Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + e_{ij}
@@ -146,16 +123,46 @@ $$
 <br />
 <br />
 <br />
+
+ -or-
+ $$
+Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + \beta_{3j}X_{3j} + ... + e_{ij}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
+ $$
+popularity_{ij}=\beta_{0j} + \beta_{1j}female_{1ij} + \beta_{2j}extraversion_{2ij}  + \beta_{3j}class_{3j} + ... + e_{ij}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ```{r olsmods, results='asis'}
 
-cp.mod <- lm(popular ~ female + extrav ,pop2)
 
-ag.pop2 <- aggregate(pop2,by=list(pop2$class),FUN=mean)
-np1.mod <- lm(popular ~ female + extrav ,ag.pop2)
-np2.mod <- lm(popular ~ female + extrav + class,pop2)
+# Models
+ols <- lm(popular ~ female + extrav, pop2)
+ols.classIV.mod <- lm(popular ~ female + extrav + factor(class),pop2)
 ml.mod <- lmer(popular ~ female + extrav + (1|class),pop2)
-mod.names <- c("1 OLS","100 OLS","MLM")
-htmlreg(list(cp.mod,np1.mod,np2.mod,ml.mod),omit.coef="class")
+mod.names <- c("OLS","OLS w/class as IV","MLM")
+
+# make table
+htmlreg(list(ols,ols.classIV.mod,ml.mod),omit.coef="class",model.names=mod.names)
+
+# show class coefficients
+
+ols.classIV.noInt.mod <- lm(popular ~ factor(class) + female + extrav - 1,pop2)
+class.coefs <- as.data.frame(cbind(coef(ols.classIV.noInt.mod)[c(1:20)],
+                                   se.coef(ols.classIV.noInt.mod)[c(1:20)]))
+names(class.coefs) <- c("coefficient","s.e.")
+print(xtable(class.coefs,caption="First 20 class coefficients"),type="html")
+paste("Range of class coefficients = ",round(range(coef(ols.classIV.noInt.mod)[1:100])[1],2)," to ",round(range(coef(ols.classIV.noInt.mod)[1:100])[2],2) )
+paste(" mean s.e. of class coefficients = ", round(mean(se.coef(ols.classIV.noInt.mod)[1:100]),2))
 ```
 
 
@@ -189,15 +196,21 @@ $$
 <br />
 <br />
 <br />
-Intraclass correlation (ICC):
-$$ 
-\rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
+
+combined:
+$$
+Y_{ij}=\gamma_{00}+u_{0j} + e_{ij}
 $$
 <br />
 <br />
 <br />
 <br />
 <br />
+Intraclass correlation (ICC):
+$$ 
+\rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
+$$
+
 
 ```{r mlmods, results='asis', comment=NA, message=FALSE}
 mod0 <- lmer(popular ~ 1 + (1 |class), pop2,REML=FALSE)
@@ -206,8 +219,10 @@ mod2 <- lmer(popular ~ female + extrav + texp + (1 + extrav|class),
              pop2,REML=FALSE)
 mod3 <- lmer(popular ~ female + extrav*texp + (1+ extrav|class),
              pop2,REML=FALSE)
-mod.names <- c("unconditional","level 1","level 2","interaction")
-htmlreg(list(mod0,mod1,mod2,mod3),model.names=mod.names,symbol="+",
+mod4 <- lmer(popular ~ female + Cextrav*Ctexp + (1 + Cextrav |class),pop2, REML=F)
+names(mod4@fixef)[3:5] <- c("extrav","texp","extrav:texp")
+mod.names <- c("unconditional","level 1","level 2","interaction","int. vars. centered")
+htmlreg(list(mod0,mod1,mod2,mod3,mod4),model.names=mod.names,symbol="+",
         caption="Multilevel Models",caption.above=TRUE)
 ```
 
@@ -226,7 +241,7 @@ popular2 <- read.spss(file="data/popular2.sav",
 # and .inp file with the basic Mplus code.
 library(MplusAutomation)
 prepareMplusData(df=popular2,
-                 filename="data/popular2.dat",      
-                 inpfile="mplus/popular2.bare.inp")
+                 filename="data/pop2.dat",      
+                 inpfile="mplus/bare.inp")
 ```
 

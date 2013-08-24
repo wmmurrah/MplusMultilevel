@@ -1,0 +1,320 @@
+Mplus VERSION 7
+MUTHEN & MUTHEN
+04/04/2013  10:27 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: pop2
+  DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+  Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
+  VARIABLE: NAMES = pupil class extrav female texp popular poptch Zextrav Zsex Ztexp
+  Zpopular Zpoptch Cextrav Ctexp Csex;
+
+  MISSING=.;
+
+  usevariables are popular female Cextrav Ctexp;
+
+  cluster is class;
+  within is female Cextrav;
+  between is Ctexp;
+  !define:
+  ! center extrav texp (grandmean);
+
+
+  analysis: type is twolevel random;
+
+  model:
+  %within%
+  popular on female;
+  rs_ex | popular on Cextrav;
+
+
+  %between%
+  popular on Ctexp;
+  rs_ex on Ctexp;
+  popular with rs_ex;
+
+  OUTPUT:  SAMPSTAT CINTERVAL;
+
+  Plot: type = plot1;
+
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+pop2
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        2000
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   POPULAR
+
+Observed independent variables
+   FEMALE      CEXTRAV     CTEXP
+
+Continuous latent variables
+   RS_EX
+
+Variables with special functions
+
+  Cluster variable      CLASS
+
+  Within variables
+   FEMALE      CEXTRAV
+
+  Between variables
+   CTEXP
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/Multilevel/MATA_Hox/2BasicM
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        100
+
+     Average cluster size       20.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     POPULAR      0.313
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              POPULAR       FEMALE        CEXTRAV       CTEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ FEMALE         1.000         1.000
+ CEXTRAV        1.000         1.000         1.000
+ CTEXP          1.000         1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              POPULAR       FEMALE        CEXTRAV       CTEXP
+              ________      ________      ________      ________
+ 1              0.000         0.505         0.000         0.000
+
+
+           Covariances
+              POPULAR       FEMALE        CEXTRAV       CTEXP
+              ________      ________      ________      ________
+ POPULAR        1.378
+ FEMALE         0.339         0.250
+ CEXTRAV        0.794         0.056         1.593
+ CTEXP          0.000         0.000         0.000         0.000
+
+
+           Correlations
+              POPULAR       FEMALE        CEXTRAV       CTEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ FEMALE         0.578         1.000
+ CEXTRAV        0.536         0.089         1.000
+ CTEXP          0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              POPULAR       FEMALE        CEXTRAV       CTEXP
+              ________      ________      ________      ________
+ 1              5.078         0.000         0.000         0.037
+
+
+           Covariances
+              POPULAR       FEMALE        CEXTRAV       CTEXP
+              ________      ________      ________      ________
+ POPULAR        0.627
+ FEMALE         0.000         0.000
+ CEXTRAV        0.000         0.000         0.000
+ CTEXP          3.822         0.000         0.000        43.230
+
+
+           Correlations
+              POPULAR       FEMALE        CEXTRAV       CTEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ FEMALE         0.000         0.000
+ CEXTRAV        0.000         0.000         0.000
+ CTEXP          0.734         0.000         0.000         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -2431.148
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        9
+
+Loglikelihood
+
+          H0 Value                       -2373.812
+          H0 Scaling Correction Factor      1.0704
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    4765.624
+          Bayesian (BIC)                  4816.032
+          Sample-Size Adjusted BIC        4787.439
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ POPULAR    ON
+    FEMALE             1.241      0.036     34.702      0.000
+
+ Residual Variances
+    POPULAR            0.553      0.021     26.233      0.000
+
+Between Level
+
+ RS_EX      ON
+    CTEXP             -0.025      0.002    -10.211      0.000
+
+ POPULAR    ON
+    CTEXP              0.097      0.009     11.242      0.000
+
+ POPULAR  WITH
+    RS_EX             -0.004      0.010     -0.426      0.670
+
+ Intercepts
+    POPULAR            4.368      0.061     71.301      0.000
+    RS_EX              0.451      0.017     26.105      0.000
+
+ Residual Variances
+    POPULAR            0.280      0.049      5.658      0.000
+    RS_EX              0.005      0.004      1.097      0.273
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.173E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ POPULAR  ON
+    FEMALE           1.149       1.171       1.182       1.241       1.299       1.311       1.333
+
+ Residual Variances
+    POPULAR          0.498       0.511       0.518       0.553       0.587       0.594       0.607
+
+Between Level
+
+ RS_EX    ON
+    CTEXP           -0.031      -0.029      -0.029      -0.025      -0.021      -0.020      -0.018
+
+ POPULAR  ON
+    CTEXP            0.075       0.080       0.083       0.097       0.111       0.114       0.120
+
+ POPULAR  WITH
+    RS_EX           -0.031      -0.025      -0.022      -0.004       0.013       0.016       0.022
+
+ Intercepts
+    POPULAR          4.210       4.248       4.267       4.368       4.469       4.488       4.526
+    RS_EX            0.406       0.417       0.422       0.451       0.479       0.485       0.495
+
+ Residual Variances
+    POPULAR          0.152       0.183       0.198       0.280       0.361       0.376       0.407
+    RS_EX           -0.006      -0.004      -0.002       0.005       0.012       0.013       0.016
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms of sample values
+  Scatterplots (sample values)
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  10:27:27
+        Ending Time:  10:27:27
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2012 Muthen & Muthen

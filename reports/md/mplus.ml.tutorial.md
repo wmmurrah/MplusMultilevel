@@ -4,24 +4,13 @@
 
 
 ```r
-load("~/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
+load("C:/RStudioProjects/MplusTutorials/MplusMultilevel/data/pop2.Rdata")
 library(psych)
 library(xtable)
 library(arm)
 library(car)
 library(texreg)
 library(GGally)
-```
-
-```
-Warning: replacing previous import 'rename' when loading 'reshape'
-```
-
-```
-Warning: replacing previous import 'round_any' when loading 'reshape'
-```
-
-```r
 str(pop2, give.attr = FALSE)
 ```
 
@@ -52,8 +41,8 @@ str(pop2, give.attr = FALSE)
 print(xtable(describe(pop2[, 1:6], interp = F, skew = F)), type = "html")
 ```
 
-<!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
-<!-- Tue Apr  2 14:15:10 2013 -->
+<!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
+<!-- Thu Apr 04 10:02:43 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -87,8 +76,8 @@ print(paste("# unique id variables =", length(u.id)))
 print(xtable(describe(pop2[, c(1:6, 16)], interp = F, skew = F)), type = "html")
 ```
 
-<!-- html table generated in R 2.15.3 by xtable 1.7-0 package -->
-<!-- Tue Apr  2 14:15:10 2013 -->
+<!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
+<!-- Thu Apr 04 10:02:43 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> var </TH> <TH> n </TH> <TH> mean </TH> <TH> sd </TH> <TH> median </TH> <TH> trimmed </TH> <TH> mad </TH> <TH> min </TH> <TH> max </TH> <TH> range </TH> <TH> se </TH>  </TR>
   <TR> <TD align="right"> pupil </TD> <TD align="right">   1 </TD> <TD align="right"> 2000.00 </TD> <TD align="right"> 10.65 </TD> <TD align="right"> 5.97 </TD> <TD align="right"> 11.00 </TD> <TD align="right"> 10.56 </TD> <TD align="right"> 7.41 </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 26.00 </TD> <TD align="right"> 25.00 </TD> <TD align="right"> 0.13 </TD> </TR>
@@ -108,26 +97,26 @@ some(pop2[, c(2, 1, 16)], n = 20)
 
 ```
      class pupil   id
-74       4    16  416
-351     18     1 1801
-358     18     8 1808
-496     25     1 2501
-590     29    15 2915
-593     29    18 2918
-660     33     8 3308
-680     34     9 3409
-777     39     9 3909
-847     43     3 4303
-1047    53     3 5303
-1064    54     1 5401
-1138    57    16 5716
-1310    66     7 6607
-1523    77     8 7708
-1676    85     3 8503
-1738    87    21 8721
-1778    89    17 8917
-1847    93    10 9310
-1932    97    17 9717
+57       3    17  317
+58       3    18  318
+242     12    13 1213
+454     22    20 2220
+694     35     1 3501
+731     36    18 3618
+842     42    19 4219
+1035    52    14 5214
+1315    66    12 6612
+1323    66    20 6620
+1345    68     1 6801
+1643    83     9 8309
+1667    84    15 8415
+1692    85    19 8519
+1704    86     9 8609
+1796    90    17 9017
+1804    91     2 9102
+1837    92    17 9217
+1893    95    20 9520
+1980    99    23 9923
 ```
 
 
@@ -168,7 +157,7 @@ ggpairs(pop2[, 3:6])
 ## Research Question:
 
 
-Are extraverted students more popular than intraverted students?
+### Are extraverted students more popular than intraverted students?
 <br />
 <br />
 <br />
@@ -208,29 +197,6 @@ $$
 <br />
 <br />
 <br />
-OLS at class level (n=100):
-$$
-\bar{Y}_{j}=\beta_{0} + \beta_{1} \bar{X}_{1j} + \beta_{2} \bar{X}_{2j} + e_{j}
-$$
-<br />
-<br />
-<br />
-<br />
-<br />
-$$
-mean.popularity_{j}=\beta_{0} + \beta_{1} mean.female_{1j} + \beta_{2} mean.extraversion_{2j} + e_{j}
-$$
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
 separate OLS regression equation for each class:
 $$
 Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + e_{ij}
@@ -250,16 +216,36 @@ $$
 <br />
 <br />
 
+ -or-
+ $$
+Y_{ij}=\beta_{0j} + \beta_{1j}X_{1ij} + \beta_{2j}X_{2ij} + \beta_{3j}X_{3j} + ... + e_{ij}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
+ $$
+popularity_{ij}=\beta_{0j} + \beta_{1j}female_{1ij} + \beta_{2j}extraversion_{2ij}  + \beta_{3j}class_{3j} + ... + e_{ij}
+$$
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
 ```r
 
-cp.mod <- lm(popular ~ female + extrav, pop2)
 
-ag.pop2 <- aggregate(pop2, by = list(pop2$class), FUN = mean)
-np1.mod <- lm(popular ~ female + extrav, ag.pop2)
-np2.mod <- lm(popular ~ female + extrav + class, pop2)
+# Models
+ols <- lm(popular ~ female + extrav, pop2)
+ols.classIV.mod <- lm(popular ~ female + extrav + factor(class), pop2)
 ml.mod <- lmer(popular ~ female + extrav + (1 | class), pop2)
-mod.names <- c("1 OLS", "100 OLS", "MLM")
-htmlreg(list(cp.mod, np1.mod, np2.mod, ml.mod), omit.coef = "class")
+mod.names <- c("OLS", "OLS w/class as IV", "MLM")
+
+# make table
+htmlreg(list(ols, ols.classIV.mod, ml.mod), omit.coef = "class", model.names = mod.names)
 ```
 
 
@@ -300,77 +286,66 @@ htmlreg(list(cp.mod, np1.mod, np2.mod, ml.mod), omit.coef = "class")
     <table cellspacing="0">
       <tr>
         <th class="modelnames"></th>
-        <th><b>Model 1</b></th>
-        <th><b>Model 2</b></th>
-        <th><b>Model 3</b></th>
-        <th><b>Model 4</b></th>
+        <th><b>OLS</b></th>
+        <th><b>OLS w/class as IV</b></th>
+        <th><b>MLM</b></th>
       </tr>
       <tr>
         <td>(Intercept)</td>
         <td>2.79<sup>***</sup></td>
-        <td>4.18<sup>***</sup></td>
-        <td>2.70<sup>***</sup></td>
+        <td>2.27<sup>***</sup></td>
         <td>2.14</td>
       </tr>
       <tr>
         <td></td>
         <td>(0.10)</td>
-        <td>(0.52)</td>
-        <td>(0.11)</td>
+        <td>(0.19)</td>
         <td>(0.12)</td>
       </tr>
       <tr>
         <td>female</td>
         <td>1.51<sup>***</sup></td>
-        <td>2.93<sup>***</sup></td>
-        <td>1.51<sup>***</sup></td>
+        <td>1.24<sup>***</sup></td>
         <td>1.25</td>
       </tr>
       <tr>
         <td></td>
         <td>(0.05)</td>
-        <td>(0.33)</td>
-        <td>(0.05)</td>
+        <td>(0.04)</td>
         <td>(0.04)</td>
       </tr>
       <tr>
         <td>extrav</td>
         <td>0.29<sup>***</sup></td>
-        <td>-0.11</td>
-        <td>0.29<sup>***</sup></td>
+        <td>0.45<sup>***</sup></td>
         <td>0.44</td>
       </tr>
       <tr>
         <td></td>
         <td>(0.02)</td>
-        <td>(0.10)</td>
         <td>(0.02)</td>
         <td>(0.02)</td>
       </tr>
       <tr>
         <td class="midRule">R<sup>2</sup></td>
         <td class="midRule">0.39</td>
-        <td class="midRule">0.44</td>
-        <td class="midRule">0.40</td>
+        <td class="midRule">0.71</td>
         <td class="midRule"></td>
       </tr>
       <tr>
         <td>Adj. R<sup>2</sup></td>
         <td>0.39</td>
-        <td>0.43</td>
-        <td>0.39</td>
+        <td>0.69</td>
         <td></td>
       </tr>
       <tr>
         <td>Num. obs.</td>
         <td>2000</td>
-        <td>100</td>
         <td>2000</td>
         <td>2000</td>
       </tr>
       <tr>
         <td>AIC</td>
-        <td></td>
         <td></td>
         <td></td>
         <td>4958.30</td>
@@ -379,12 +354,10 @@ htmlreg(list(cp.mod, np1.mod, np2.mod, ml.mod), omit.coef = "class")
         <td>BIC</td>
         <td></td>
         <td></td>
-        <td></td>
         <td>4986.30</td>
       </tr>
       <tr>
         <td>Log Likelihood</td>
-        <td></td>
         <td></td>
         <td></td>
         <td>-2474.15</td>
@@ -393,12 +366,10 @@ htmlreg(list(cp.mod, np1.mod, np2.mod, ml.mod), omit.coef = "class")
         <td>Deviance</td>
         <td></td>
         <td></td>
-        <td></td>
         <td>4948.30</td>
       </tr>
       <tr>
         <td>Num. groups: class</td>
-        <td></td>
         <td></td>
         <td></td>
         <td>100</td>
@@ -407,22 +378,71 @@ htmlreg(list(cp.mod, np1.mod, np2.mod, ml.mod), omit.coef = "class")
         <td>Variance: class.(Intercept)</td>
         <td></td>
         <td></td>
-        <td></td>
         <td>0.63</td>
       </tr>
       <tr>
         <td class="bottomRule">Variance: Residual</td>
         <td class="bottomRule"></td>
         <td class="bottomRule"></td>
-        <td class="bottomRule"></td>
         <td class="bottomRule">0.59</td>
       </tr>
       <tr>
-        <td colspan="5"><span style="font-size:0.8em"><sup>***</sup>p &lt; 0.001, <sup>**</sup>p &lt; 0.01, <sup>*</sup>p &lt; 0.05, <sup>&middot;</sup>p &lt; 0.1</span></td>
+        <td colspan="4"><span style="font-size:0.8em"><sup>***</sup>p &lt; 0.001, <sup>**</sup>p &lt; 0.01, <sup>*</sup>p &lt; 0.05, <sup>&middot;</sup>p &lt; 0.1</span></td>
       </tr>
      </table>
   </body>
 </html>
+
+```r
+
+# show class coefficients
+
+ols.classIV.noInt.mod <- lm(popular ~ factor(class) + female + extrav - 1, pop2)
+class.coefs <- as.data.frame(cbind(coef(ols.classIV.noInt.mod)[c(1:20)], se.coef(ols.classIV.noInt.mod)[c(1:20)]))
+names(class.coefs) <- c("coefficient", "s.e.")
+print(xtable(class.coefs, caption = "First 20 class coefficients"), type = "html")
+```
+
+<!-- html table generated in R 2.15.3 by xtable 1.7-1 package -->
+<!-- Thu Apr 04 10:02:45 2013 -->
+<TABLE border=1>
+<CAPTION ALIGN="bottom"> First 20 class coefficients </CAPTION>
+<TR> <TH>  </TH> <TH> coefficient </TH> <TH> s.e. </TH>  </TR>
+  <TR> <TD align="right"> factor(class)1 </TD> <TD align="right"> 2.27 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)2 </TD> <TD align="right"> 1.30 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)3 </TD> <TD align="right"> 1.51 </TD> <TD align="right"> 0.20 </TD> </TR>
+  <TR> <TD align="right"> factor(class)4 </TD> <TD align="right"> 2.79 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)5 </TD> <TD align="right"> 2.05 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)6 </TD> <TD align="right"> 1.46 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)7 </TD> <TD align="right"> 1.39 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)8 </TD> <TD align="right"> 0.78 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)9 </TD> <TD align="right"> 1.86 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)10 </TD> <TD align="right"> 2.40 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)11 </TD> <TD align="right"> 1.54 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)12 </TD> <TD align="right"> 1.74 </TD> <TD align="right"> 0.20 </TD> </TR>
+  <TR> <TD align="right"> factor(class)13 </TD> <TD align="right"> 3.09 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)14 </TD> <TD align="right"> 0.55 </TD> <TD align="right"> 0.22 </TD> </TR>
+  <TR> <TD align="right"> factor(class)15 </TD> <TD align="right"> 1.82 </TD> <TD align="right"> 0.18 </TD> </TR>
+  <TR> <TD align="right"> factor(class)16 </TD> <TD align="right"> 1.21 </TD> <TD align="right"> 0.21 </TD> </TR>
+  <TR> <TD align="right"> factor(class)17 </TD> <TD align="right"> 2.34 </TD> <TD align="right"> 0.17 </TD> </TR>
+  <TR> <TD align="right"> factor(class)18 </TD> <TD align="right"> 3.51 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)19 </TD> <TD align="right"> 2.79 </TD> <TD align="right"> 0.19 </TD> </TR>
+  <TR> <TD align="right"> factor(class)20 </TD> <TD align="right"> 2.09 </TD> <TD align="right"> 0.19 </TD> </TR>
+   </TABLE>
+
+```r
+paste("Range of class coefficients = ", round(range(coef(ols.classIV.noInt.mod)[1:100])[1], 
+    2), " to ", round(range(coef(ols.classIV.noInt.mod)[1:100])[2], 2))
+```
+
+[1] "Range of class coefficients =  0.06  to  3.87"
+
+```r
+paste(" mean s.e. of class coefficients = ", round(mean(se.coef(ols.classIV.noInt.mod)[1:100]), 
+    2))
+```
+
+[1] " mean s.e. of class coefficients =  0.19"
 
 
 
@@ -456,15 +476,21 @@ $$
 <br />
 <br />
 <br />
-Intraclass correlation (ICC):
-$$ 
-\rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
+
+combined:
+$$
+Y_{ij}=\gamma_{00}+u_{0j} + e_{ij}
 $$
 <br />
 <br />
 <br />
 <br />
 <br />
+Intraclass correlation (ICC):
+$$ 
+\rho =\frac{\sigma_{u_0}^2}{\sigma_{u_0}^2 + \sigma_{e}^2}
+$$
+
 
 
 ```r
@@ -474,8 +500,11 @@ mod2 <- lmer(popular ~ female + extrav + texp + (1 + extrav | class), pop2,
     REML = FALSE)
 mod3 <- lmer(popular ~ female + extrav * texp + (1 + extrav | class), pop2, 
     REML = FALSE)
-mod.names <- c("unconditional", "level 1", "level 2", "interaction")
-htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+", 
+mod4 <- lmer(popular ~ female + Cextrav * Ctexp + (1 + Cextrav | class), pop2, 
+    REML = F)
+names(mod4@fixef)[3:5] <- c("extrav", "texp", "extrav:texp")
+mod.names <- c("unconditional", "level 1", "level 2", "interaction", "int. vars. centered")
+htmlreg(list(mod0, mod1, mod2, mod3, mod4), model.names = mod.names, symbol = "+", 
     caption = "Multilevel Models", caption.above = TRUE)
 ```
 
@@ -522,6 +551,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <th><b>level 1</b></th>
         <th><b>level 2</b></th>
         <th><b>interaction</b></th>
+        <th><b>int. vars. centered</b></th>
       </tr>
       <tr>
         <td>(Intercept)</td>
@@ -529,6 +559,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>2.14</td>
         <td>0.74</td>
         <td>-1.21</td>
+        <td>4.37</td>
       </tr>
       <tr>
         <td></td>
@@ -536,6 +567,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>(0.12)</td>
         <td>(0.20)</td>
         <td>(0.27)</td>
+        <td>(0.06)</td>
       </tr>
       <tr>
         <td>female</td>
@@ -543,10 +575,12 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>1.25</td>
         <td>1.25</td>
         <td>1.24</td>
+        <td>1.24</td>
       </tr>
       <tr>
         <td></td>
         <td></td>
+        <td>(0.04)</td>
         <td>(0.04)</td>
         <td>(0.04)</td>
         <td>(0.04)</td>
@@ -557,6 +591,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>0.44</td>
         <td>0.45</td>
         <td>0.80</td>
+        <td>0.45</td>
       </tr>
       <tr>
         <td></td>
@@ -564,6 +599,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>(0.02)</td>
         <td>(0.02)</td>
         <td>(0.04)</td>
+        <td>(0.02)</td>
       </tr>
       <tr>
         <td>texp</td>
@@ -571,6 +607,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td></td>
         <td>0.09</td>
         <td>0.23</td>
+        <td>0.10</td>
       </tr>
       <tr>
         <td></td>
@@ -578,12 +615,14 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td></td>
         <td>(0.01)</td>
         <td>(0.02)</td>
+        <td>(0.01)</td>
       </tr>
       <tr>
         <td>extrav:texp</td>
         <td></td>
         <td></td>
         <td></td>
+        <td>-0.02</td>
         <td>-0.02</td>
       </tr>
       <tr>
@@ -592,12 +631,14 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td></td>
         <td></td>
         <td>(0.00)</td>
+        <td>(0.00)</td>
       </tr>
       <tr>
         <td class="midRule">AIC</td>
         <td class="midRule">6333.47</td>
         <td class="midRule">4943.95</td>
         <td class="midRule">4828.81</td>
+        <td class="midRule">4765.62</td>
         <td class="midRule">4765.62</td>
       </tr>
       <tr>
@@ -606,12 +647,14 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>4971.96</td>
         <td>4873.61</td>
         <td>4816.03</td>
+        <td>4816.03</td>
       </tr>
       <tr>
         <td>Log Likelihood</td>
         <td>-3163.73</td>
         <td>-2466.98</td>
         <td>-2406.40</td>
+        <td>-2373.81</td>
         <td>-2373.81</td>
       </tr>
       <tr>
@@ -620,9 +663,11 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>4933.95</td>
         <td>4812.81</td>
         <td>4747.62</td>
+        <td>4747.62</td>
       </tr>
       <tr>
         <td>Num. obs.</td>
+        <td>2000</td>
         <td>2000</td>
         <td>2000</td>
         <td>2000</td>
@@ -634,6 +679,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>100</td>
         <td>100</td>
         <td>100</td>
+        <td>100</td>
       </tr>
       <tr>
         <td>Variance: class.(Intercept)</td>
@@ -641,6 +687,7 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>0.62</td>
         <td>1.28</td>
         <td>0.45</td>
+        <td>0.28</td>
       </tr>
       <tr>
         <td>Variance: Residual</td>
@@ -648,16 +695,26 @@ htmlreg(list(mod0, mod1, mod2, mod3), model.names = mod.names, symbol = "+",
         <td>0.59</td>
         <td>0.55</td>
         <td>0.55</td>
+        <td>0.55</td>
       </tr>
       <tr>
-        <td class="bottomRule">Variance: class.extrav</td>
+        <td>Variance: class.extrav</td>
+        <td></td>
+        <td></td>
+        <td>0.03</td>
+        <td>0.00</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="bottomRule">Variance: class.Cextrav</td>
         <td class="bottomRule"></td>
         <td class="bottomRule"></td>
-        <td class="bottomRule">0.03</td>
+        <td class="bottomRule"></td>
+        <td class="bottomRule"></td>
         <td class="bottomRule">0.00</td>
       </tr>
       <tr>
-        <td colspan="5"><span style="font-size:0.8em"><sup>***</sup>p &lt; 0.001, <sup>**</sup>p &lt; 0.01, <sup>*</sup>p &lt; 0.05, <sup>+</sup>p &lt; 0.1</span></td>
+        <td colspan="6"><span style="font-size:0.8em"><sup>***</sup>p &lt; 0.001, <sup>**</sup>p &lt; 0.01, <sup>*</sup>p &lt; 0.05, <sup>+</sup>p &lt; 0.1</span></td>
       </tr>
      </table>
   </body>
@@ -677,7 +734,7 @@ popular2 <- read.spss(file = "data/popular2.sav", use.value.labels = FALSE,
 # The following command creates a .dat file and and .inp file with the
 # basic Mplus code.
 library(MplusAutomation)
-prepareMplusData(df = popular2, filename = "data/popular2.dat", inpfile = "mplus/popular2.bare.inp")
+prepareMplusData(df = popular2, filename = "data/pop2.dat", inpfile = "mplus/bare.inp")
 ```
 
 

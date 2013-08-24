@@ -1,7 +1,7 @@
-TITLE: pop2
-DATA: FILE = "~/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
+TITLE: pop2 Multilevel: Unconditional Model
+DATA: FILE = "C:/Dropbox/R/LearningAnalyses/2_StatisticalMethods/
 Multilevel/MATA_Hox/2BasicModel/MplusAnalyses/pop2.dat";
-VARIABLE: NAMES = pupil class extrav sex texp popular poptch Zextrav Zsex Ztexp
+VARIABLE: NAMES = pupil class extrav female texp popular poptch Zextrav Zsex Ztexp
 Zpopular Zpoptch Cextrav Ctexp Csex;
 
 MISSING=.;

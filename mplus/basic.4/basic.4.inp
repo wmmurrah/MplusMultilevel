@@ -6,23 +6,27 @@ Zpopular Zpoptch Cextrav Ctexp Csex;
 
 MISSING=.;
 
-usevariables are popular female extrav;
+usevariables are popular female extrav texp;
 
 cluster is class;
 within is female extrav;
-
+between is texp;
+define:
+ center extrav texp (grandmean);
 
 
 analysis: type is twolevel random;
 
 model:
 %within%
-popular on female extrav;
+popular on female;
+rs_ex | popular on extrav;
 
 
 %between%
-popular;
-
+popular on texp;
+rs_ex on texp;
+popular with rs_ex;
 
 OUTPUT:  SAMPSTAT CINTERVAL;
 
